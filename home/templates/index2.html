@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<div class="hero-container">
+  <h3>Welcome to <strong>Shopping Cart</strong></h3>
+  <h1>Erilicious</h1>
+  <h2>We are team of talented designers making websites with Bootstrap</h2>
+  <a href="#about" class="btn-get-started scrollto">Get Started</a>
+</div>
+{% endblock content %}
+
+
+{% block body %}
+
+{% load static %}
+
+
+
+
+<main>
+    <div class="container">
+
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+          {% for product in object_list %}
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                {% comment %} <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt=""> {% endcomment %}
+                <img src="/media/{{ product.image }}" class="card-img-top" alt="not found" height="300px" width="100px" />
+                  <a href="{{ product.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <!--Card image-->
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                <h5>
+                    <strong>
+                      <a href="{% url 'home:productview' product.id %}" class="dark-grey-text">{{ product.product_name }}</a>
+                    </strong>
+                  </h5>
+                  
+                  <h5 class="grey-text">{{ product.get_category_display }}</h5>
+                  <span id="divpr{{ product.id }}" class="divpr">
+                    <a href = "{% url 'cart:add_to_cart' product.id %}"><button id="pr{{ product.id }}" class="btn btn-success cart btn-sm mt-0">AddToCart</button></a>
+                  </span>
+             
+              </div>
+              <!--Card content-->
+
+            </div>
+            <!--Card-->
+
+          </div>
+          <!--Grid column-->
+
+          {% endfor %}
+         
+        </div>
+        <!--Grid row-->
+
+      </section>
+      <!--Section: Products v.3-->
+
+    </div>
+  </main>
+
+<!-- End Portfolio Section -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+{% endblock body %}

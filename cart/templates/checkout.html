@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cart
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="hero-container">
+
+    <div class="card bg-light p-5">
+
+        <p><strong>Review your order</strong></p>
+
+        {% for message in messages %} 
+    
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+          <strong>{{message}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+        {% endfor %}
+
+
+        {% if cart_items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th>Remove 1</th>
+                    <th>Remove all</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.product_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.price }}</td>
+                    <td>{{ item.total_item_price }}</td>
+                    <td><a href="{% url 'cart:remove_from_cart' item.id %}">Remove 1</a></td>
+                    <td><a href="{% url 'cart:remove_all_from_cart' item.id %}">Remove all</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td>Total:</td>
+                    <td>{{ total_price }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <form method="post" action="/checkout">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Phone Number</label>
+                <input type="text" class="form-control" id="phone" name = "phone" placeholder="Enter your Phone Number">
+            </div>
+            <div class="form-group py-2">
+                <label for="name">Address</label>
+                <input type="text" class="form-control" id="address" name = "address" placeholder="Enter your Address">
+            </div>
+            <div class="form-group py-2">
+                <label for="name">Zip Code</label>
+                <input type="text" class="form-control" id="code" name = "code" placeholder="Enter your ZIP Code">
+            </div>
+            <button class = "btn btn-primary py-2" type="submit">Place Order</button>
+        </form>
+
+        
+        {% else %}
+        <p>Your shopping cart is empty.</p>
+        {% endif %}
+
+    </div>
+  
+    
+</div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero-container">
+
+    <div class="card bg-light p-5">
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/media/{{ product.image }}" class="card-img-top" alt="not found" height="300px" width="300px" />
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title mt-3" id="namepr{{ product.id }}">{{ product.product_name }}</h5>
+                        <p class="card-text">{{ product.category }}</p>
+                        <p class="card-text">{{ product.subcategory }}</p>
+                        <p class="card-text">{{ product.desc }}</p>
+                        <h6 class="card-title mb-3">
+                            Price: <span id="pricepr{{ product.id }}">{{ product.price }}</span>
+                        </h6>
+                        <span id="divpr{{ product.id }}" class="divpr">
+                            <a href="{% url 'home:productview' product.id %}">
+                                <button id="pr{{ product.id }}"
+                                    class="btn btn-success cart btn-sm mt-0">AddToCart</button>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

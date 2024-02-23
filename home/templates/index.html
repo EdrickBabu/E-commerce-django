@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<div class="hero-container">
+  <h3>Welcome to <strong>Shopping Cart</strong></h3>
+  <h1>Erilicious</h1>
+  <h2>We are team of talented designers making websites with Bootstrap</h2>
+  <a href="#about" class="btn-get-started scrollto">Get Started</a>
+</div>
+{% endblock content %}
+
+
+{% block body %}
+
+{% load static %}
+
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Welcome to Erilicious</h2>
+      <h3>Check out our <span>Products</span></h3>
+    </div>
+
+
+    {% comment %} {% for product, range, nSlides %}
+
+    <h3 class="my-3 text-center text-success bg-light">
+      {{product.0.category}} Flashsale
+    </h3>
+
+    <div class="container">
+      <div class="row">
+
+        {% for i in product %}
+
+        <div class="col-md-3 mt-3">
+          <img src="/media/{{i.image}}" class="card-img-top" alt="not found" height="200px" width="150px" />
+          <div class="card-body">
+            <h5 class="card-title mt-2" id="namepr{{i.id}}">{{i.product_name}}</h5>
+            <p class="card-text">{{i.desc|slice:"0:53"}}...</p>
+            <h6 class="card-title mb-3">
+              Price:<span id="pricepr{{i.id}}">{{i.price}}</span>
+            </h6>
+            <span id="divpr{{i.id}}" class="divpr">
+              <button id="pr{{i.id}}" class="btn btn-danger cart btn-sm mt-0">
+                AddToCart
+              </button>
+            </span>
+
+            <a href="/media/{{i.image}}">
+              <button class="btn btn-dark btn-sm cart">View</button></a>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+
+    {% endfor %} {% endcomment %}
+
+    {% for product_set in allProds %}
+
+    <div class="container">
+      <div class="row">
+
+        {% for product in product_set %}
+
+        <div class="col-md-4 mt-3">
+          <img src="/media/{{ product.image }}" class="card-img-top" alt="not found" height="300px" width="100px" />
+          <div class="card-body">
+            <h5 class="card-title mt-3" id="namepr{{ product.id }}">{{ product.product_name }}</h5>
+            <p class="card-text">{{ product.desc|slice:"0:53" }}...</p>
+            <h6 class="card-title mb-3">
+              Price: <span id="pricepr{{ product.id }}">{{ product.price }}</span>
+            </h6>
+            <span id="divpr{{ product.id }}" class="divpr">
+              <a href = "{% url 'cart:add_to_cart' product.id %}"><button id="pr{{ product.id }}" class="btn btn-danger cart btn-sm mt-0">AddToCart</button></a>
+            </span>
+
+            {% comment %} <a href="/media/{{ product.image }}"><button class="btn btn-dark btn-sm cart">View</button></a> {% endcomment %}
+            <a href="{% url 'home:productview' product.id %}"><button class="btn btn-dark btn-sm cart">View</button></a>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+
+{% endfor %}
+
+
+
+  </div>
+</section>
+
+<!-- End Portfolio Section -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+
+{% endblock body %}

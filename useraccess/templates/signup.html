@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Signup
+{% endblock title %}
+
+{% block content %}
+<div class="hero-container">
+
+    <div class="card bg-light p-5">
+
+        {% for message in messages %} 
+    
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+          <strong>{{message}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+        {% endfor %}
+        
+        <h2 class = "text-dark"><strong>SignUp</strong></h2>
+
+        <form action = "/signup" method = "post">
+            {% csrf_token %}
+            <br>
+            
+            <label for="email">Email</label>
+            <div class = "form-group p-2">
+                <input type="email" class= "form-control" id="email" name = "email" required>
+            </div>
+            <label for="password1">Password</label>
+            <div class = "form-group p-2">
+                <input type="password" class= "form-control" id="password1" name = "password1" required>
+            </div>
+            <label for="password2">Confirm Password</label>
+            <div class = "form-group p-2">
+                <input type="password" class= "form-control" id="password2" name = "password2" required>
+            </div>
+
+            <br>
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            <br>
+
+            <br>
+            Already User? <a href="/login">Login</a>
+            <br>
+
+        </form>
+
+    </div>
+  
+    
+</div>
+
+{% endblock content %}
